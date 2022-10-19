@@ -1,13 +1,16 @@
 console.log("Welcome Tic Tac Toe");
-let music = new Audio("music.mp3") //background music
-let audioTurn = new Audio("ting.mp3")
-let gameover = new Audio("gameover.mp3")
+let music = new Audio("win.mp3") //background music
+let audioTurn = new Audio("turn.mp3")
+let gameover = new Audio("gameover.mp3");
 let turn = "X";
 let isgameover = false;
 
 //Function to change the turn
+let c=0;
 const changeTurn = ()=>{
-    return turn === "X"?"0": "X"
+    audioTurn.play();
+    c++;
+    return (turn === "X"?"0": "X")
 }
 
 //function to check for a win
@@ -24,11 +27,14 @@ const checkWin = ()=>{
         [2,4,6],
     ]
     wins.forEach(e => {
-    
-        if((boxtext[e[0]].innerText === box[e[1]].innerText) && (boxtext[e[2]].innerText === box[e[1]].innerText) && (boxtext[e[0]].innerText !== " ")){
+        if((boxtext[e[0]].innerText === boxtext[e[1]].innerText) && (boxtext[e[2]].innerText === boxtext[e[1]].innerText) && (boxtext[e[0]].innerText !== "")){
             document.querySelector('.info').innerText = boxtext[e[0]].innerText + " Won"
             isgameover = true
+            music.play();
             document.querySelector('.imgbox').getElementsByTagName('img')[0].style.width = "200px"
+         }
+         else if(c==9 && !isgameover){
+            gameover.play();
          }
      })
 }
@@ -67,6 +73,5 @@ reset.addEventListener('click', (e)=>{
         document.querySelector('.imgbox').getElementsByClassName,emtsByTagName('img')[0].style.width = "200px"
     
 })
-
 
 
